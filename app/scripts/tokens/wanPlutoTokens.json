@@ -1,0 +1,14 @@
+[
+  {
+    "address": "0x46397994a7e1e926ea0de95557a4806d38f10b0d",
+    "symbol": "WETH",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x3ba524a9b01de0953ba8fe720befac9e14ff95b9",
+    "symbol": "WBTC",
+    "decimal": 8,
+    "type": "default"
+  },
+]

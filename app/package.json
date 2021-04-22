@@ -1,0 +1,13 @@
+{
+    "name": "MyWanWallet",
+    "version": "2.1.0",
+    "description": "An NPM dist of MyWanWallet. For easier downloading & updating via CLI.",
+    "author": "MyWanWallet",
+    "license": "ISC",
+    "devDependencies": {
+        "open": "6.0.0"
+    },
+    "bin": {
+        "mew": "bin/startMEW.js"
+    }
+}

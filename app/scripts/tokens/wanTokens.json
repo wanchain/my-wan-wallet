@@ -1,0 +1,74 @@
+[
+  {
+    "address": "0x28362cd634646620ef2290058744f9244bb90ed9",
+    "symbol": "WETH",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x0",
+    "symbol": "WBTC",
+    "decimal": 8,
+    "type": "default"
+  },
+  {
+    "address": "0xf13157514786E037849b5E42217e13dda86bA90e",
+    "symbol": "WGUSD",
+    "decimal": 2,
+    "type": "default"
+  },
+  {
+    "address": "0x51316966907ef568689775066e97c46a4Ffde1a4",
+    "symbol": "WAURA",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x350bb91C9C8Ef4e8C0e19fbdc6A90A24bcb1eC2A",
+    "symbol": "WMKR",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0xA26A6698b95144Ce27714D4657F153Dc48e676d5",
+    "symbol": "WUSDC",
+    "decimal": 6,
+    "type": "default"
+  },
+  {
+    "address": "0x41c8b92Df1552ACD976dB7d0c9Bc269F3C45B0F5",
+    "symbol": "WDAI",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0xacEe80F83343c2C13Afb6e89E8740699AEa3D7E8",
+    "symbol": "WLRC",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0xacEe80F83343c2C13Afb6e89E8740699AEa3D7E8",
+    "symbol": "WLINK",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x79562c955dEA8A801f057A386c9aA9f5D9Bf0f92",
+    "symbol": "WTUSD",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x6cbf35f1ab7beb07ebfe8818045f379a1212a10b",
+    "symbol": "TYR",
+    "decimal": 18,
+    "type": "default"
+  },
+  {
+    "address": "0x3BEB80170272f07aCA12987AF86A59888255A807",
+    "symbol": "CURV",
+    "decimal": 18,
+    "type": "default"
+  }
+]

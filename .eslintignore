@@ -1,0 +1,7 @@
+node_modules/**
+dist/**
+chrome-extension/**
+releases/**
+app/scripts/staticJS/**
+test-builds
+test-artifacts
