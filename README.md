@@ -1,9 +1,7 @@
 # MyWanWallet
 
 [![Website](https://img.shields.io/website-up-down-green-red/http/mywanwallet.com.svg?label=myWanWallet.com\&style=flat-square)](http://www.mywanwallet.com/)
-[![CircleCI][circle-image]][circle-url]
 [![GitHub issues](https://img.shields.io/github/issues-raw/wanchain/my-wan-wallet.svg?style=flat-square)](https://github.com/wanchain/my-wan-wallet/issues)
-[![Coverage Status][coveralls-image]][coveralls-url]
 [![GitHub package version](https://img.shields.io/github/package-json/v/wanchain/my-wan-wallet.svg?style=flat-square)](https://github.com/wanchain/my-wan-wallet/blob/main/package.json)
 ![GitHub contributors](https://img.shields.io/github/contributors/wanchain/my-wan-wallet.svg?style=flat-square) 
 
