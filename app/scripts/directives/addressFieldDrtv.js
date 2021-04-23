@@ -32,11 +32,11 @@ var addressFieldDrtv = function ($compile) {
                 </div>')
             scope.$watch('addressDrtv.ensAddressField', function () {
                 var _ens = new ens()
-                if (Validator.isValidAddress(scope.addressDrtv.ensAddressField)) {
-                    setValue(scope.addressDrtv.ensAddressField)
-                    if (!Validator.isChecksumAddress(scope.addressDrtv.ensAddressField)) {
-                        scope.notifier.info(globalFuncs.errorMsgs[35])
-                    }
+                if (scope.addressDrtv.ensAddressField.startsWith('Please') || Validator.isValidAddress(scope.addressDrtv.ensAddressField)) {
+                    setValue(scope.addressDrtv.ensAddressField.startsWith('Please') ? '0x' : scope.addressDrtv.ensAddressField)
+                    // if (scope.addressDrtv.ensAddressField !== '0x' && !Validator.isChecksumAddress(scope.addressDrtv.ensAddressField)) {
+                    //     scope.notifier.info(globalFuncs.errorMsgs[35])
+                    // }
                 } else if (Validator.isValidENSAddress(scope.addressDrtv.ensAddressField)) {
                     _ens.getAddress(scope.addressDrtv.ensAddressField, function (data) {
                         if (data.error) uiFuncs.notifier.danger(data.msg)

@@ -26,6 +26,7 @@ var contractsCtrl = function ($scope, $sce, walletService) {
         abi: '',
         functions: [],
         selectedFunc: null,
+        name: '',
     }
     $scope.selectedAbi = ajaxReq.abiList[0]
     $scope.showRaw = false
@@ -62,9 +63,12 @@ var contractsCtrl = function ($scope, $sce, walletService) {
         }
     }, true)
     $scope.$watch('contract.address', function (newValue, oldValue) {
-        if ($scope.Validator.isValidAddress($scope.contract.address)) {
+        if (['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name) || $scope.Validator.isValidAddress($scope.contract.address)) {
             for (var i in ajaxReq.abiList) {
-                if (ajaxReq.abiList[i].address.toLowerCase() === $scope.contract.address.toLowerCase()) {
+                if (!$scope.contract.address && ['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name)) {
+                  break
+                }
+                if (ajaxReq.abiList[i].name === $scope.contract.name || ajaxReq.abiList[i].address.toLowerCase() === $scope.contract.address.toLowerCase()) {
                     $scope.contract.abi = ajaxReq.abiList[i].abi
                     break
                 }
@@ -75,6 +79,7 @@ var contractsCtrl = function ($scope, $sce, walletService) {
         $scope.selectedAbi = ajaxReq.abiList[index]
         $scope.contract.address = $scope.selectedAbi.address
         $scope.addressDrtv.ensAddressField = $scope.selectedAbi.address
+        $scope.contract.name = $scope.selectedAbi.name
         $scope.addressDrtv.showDerivedAddress = false
         $scope.dropdownExistingContracts = false
         $scope.contract.selectedFunc = null
@@ -192,16 +197,16 @@ var contractsCtrl = function ($scope, $sce, walletService) {
     }
     $scope.initContract = function () {
         try {
-            if (!$scope.Validator.isValidAddress($scope.contract.address)) throw globalFuncs.errorMsgs[5]
+            if (!['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name) && !$scope.Validator.isValidAddress($scope.contract.address)) throw globalFuncs.errorMsgs[5]
             else if (!$scope.Validator.isJSON($scope.contract.abi)) throw globalFuncs.errorMsgs[26]
             $scope.contract.functions = []
             var tAbi = JSON.parse($scope.contract.abi)
             for (var i in tAbi) {
-if (tAbi[i].type === 'function') {
-                    tAbi[i].inputs.map(function (i) { i.value = '' })
-                    $scope.contract.functions.push(tAbi[i])
-                }
-}
+              if (tAbi[i].type === 'function') {
+                  tAbi[i].inputs.map(function (i) { i.value = '' })
+                  $scope.contract.functions.push(tAbi[i])
+              }
+            }
             $scope.showReadWrite = true
 
         } catch (e) {
