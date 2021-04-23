@@ -1,6 +1,9 @@
 'use strict'
 var ethFuncs = function () {}
 var ethUtil = require('wanchainjs-util')
+var Web3 = require('web3')
+var web3 = new Web3()
+
 ethFuncs.gasAdjustment = 40
 ethFuncs.validateEtherAddress = function (address) {
     if (address.substring(0, 2) !== '0x') return false
@@ -9,7 +12,7 @@ ethFuncs.validateEtherAddress = function (address) {
     else { return this.isChecksumAddress(address) }
 }
 ethFuncs.isChecksumAddress = function (address) {
-    return address === ethUtil.toChecksumAddress(address)
+    return ethUtil.toChecksumAddress(address) === address || web3.isChecksumAddress(address)
 }
 ethFuncs.validateHexString = function (str) {
     if (str === '') return true
