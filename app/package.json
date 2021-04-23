@@ -1,6 +1,6 @@
 {
     "name": "MyWanWallet",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "An NPM dist of MyWanWallet. For easier downloading & updating via CLI.",
     "author": "MyWanWallet",
     "license": "ISC",
