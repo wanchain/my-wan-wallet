@@ -79,7 +79,7 @@ TrezorConnect.manifest({
 "url" : "https://mywanwallet.com/",
 "contactPoint" : [{
   "@type" : "ContactPoint",
-  "email" : "support@mywanwallet.com",
+  "email" : "support@wanchain.org",
   "url"   : "https://mywanwallet.com",
   "contactType" : "customer service"
 }],
@@ -87,7 +87,7 @@ TrezorConnect.manifest({
 "description": "MyWanWallet.com is a free, open-source, client-side interface for generating Wanchain wallets &amp; more. Interact with the Wanchain blockchain easily &amp; securely.",
 "sameAs" : [
   "https://mywanwallet.com/",
-  "https://github.nl/C3Devs/mywanwallet",
+  "https://github.nl/wanchain/my-wan-wallet",
 ]
 }
 </script>

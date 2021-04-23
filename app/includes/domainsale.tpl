@@ -5,9 +5,9 @@
       <!-- Title -->
       <article class="cont-md">
         <h1 class="text-center" translate="NAV_DomainSale"> DomainSale </h1>
-        <p>
+        <!-- <p>
           <a href="https://github.com/C3Devs/domainsalewan/" target="_blank" rel="noopener noreferrer">DomainSale</a> is a secondary market for the <a href="https://medium.com/wanchain-foundation/wanchain-name-serivce-wns-has-been-deployed-49c4894cafd9" target="_blank" rel="noopener noreferrer">Wanchain Name Service</a> that allows you to buy and sell domains that are already owned.
-        </p>
+        </p> -->
       </article>
       <!-- / Title -->
 

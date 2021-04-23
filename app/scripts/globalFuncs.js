@@ -210,7 +210,7 @@ globalFuncs.getDefaultTokensAndNetworkType = function getDefaultTokensAndNetwork
         'wan': require('./tokens/wanTokens.json'),
     }
 
-    var nodeErrMsg = 'Node does not exist, contact support@mywanwallet.com CODE:localstorageNodeMissing'
+    var nodeErrMsg = 'Node does not exist, contact support@wanchain.org CODE:localstorageNodeMissing'
     // localStorage selected node
     var currentNodeKey = getFromLS('curNode', nodeErrMsg).key
     // custom nodes in local storage
