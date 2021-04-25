@@ -6,7 +6,7 @@
       <td class="mono">
         {{objENS.name}}.wan
         <!-- TODO: ENS Browser
-        <a href="https://etherscan.io/enslookup?q={{objENS.name}}.wan"
+        <a href="https://wanscan.org/enslookup?q={{objENS.name}}.wan"
            target="_blank"
            rel="noopener noreferrer">
               {{objENS.name}}.wan
