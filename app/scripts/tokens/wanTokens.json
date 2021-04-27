@@ -4,7 +4,7 @@
     "address": "0x8b9f9f4aa70b1b0d586be8adfb19c1ac38e05e9a",
     "name": "WASP",
     "symbol": "WASP",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/WASP.png",
     "type": "default"
   },
@@ -13,7 +13,7 @@
     "address": "0xc6f4465a6a521124c8e3096b62575c157999d361",
     "name": "FNX",
     "symbol": "FNX",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/FNX.png",
     "type": "default"
   },
@@ -22,7 +22,7 @@
     "address": "0xe3ae74d1518a76715ab4c7bedf1af73893cd435a",
     "name": "wanETH",
     "symbol": "wanETH",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanETH.png",
     "type": "default"
   },
@@ -31,7 +31,7 @@
     "address": "0xd15e200060fc17ef90546ad93c1c61bfefdc89c7",
     "name": "wanOBTC",
     "symbol": "wanOBTC",
-    "decimals": 8,
+    "decimal": 8,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanBTC.png",
     "type": "default"
   },
@@ -40,7 +40,7 @@
     "address": "0x50c439b6d602297252505a6799d84ea5928bcfb6",
     "name": "wanBTC",
     "symbol": "wanBTC",
-    "decimals": 8,
+    "decimal": 8,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanBTC.png",
     "type": "default"
   },
@@ -49,7 +49,7 @@
     "address": "0x81862b7622ced0defb652addd4e0c110205b0040",
     "name": "wanEOS",
     "symbol": "wanEOS",
-    "decimals": 4,
+    "decimal": 4,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanEOS.png",
     "type": "default"
   },
@@ -58,7 +58,7 @@
     "address": "0x11e77e27af5539872efed10abaa0b408cfd9fbbd",
     "name": "wanUSDT",
     "symbol": "wanUSDT",
-    "decimals": 6,
+    "decimal": 6,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanUSDT.png",
     "type": "default"
   },
@@ -67,7 +67,7 @@
     "address": "0xdabd997ae5e4799be47d6e69d9431615cba28f48",
     "name": "WWAN",
     "symbol": "WWAN",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wWAN.png",
     "type": "default"
   },
@@ -76,7 +76,7 @@
     "address": "0x52a9cea01c4cbdd669883e41758b8eb8e8e2b34b",
     "name": "wanUSDC",
     "symbol": "wanUSDC",
-    "decimals": 6,
+    "decimal": 6,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanUSDC.png",
     "type": "default"
   },
@@ -85,7 +85,7 @@
     "address": "0x06da85475f9d2ae79af300de474968cd5a4fde61",
     "name": "wanLINK",
     "symbol": "wanLINK",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanLINK.png",
     "type": "default"
   },
@@ -94,7 +94,7 @@
     "address": "0x73eaa7431b11b1e7a7d5310de470de09883529df",
     "name": "wanUNI",
     "symbol": "wanUNI",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanUNI.png",
     "type": "default"
   },
@@ -103,7 +103,7 @@
     "address": "0x9b6863f6ab2047069ad1cd15fff8c45af637d67c",
     "name": "wanSUSHI",
     "symbol": "wanSUSHI",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanSUSHI.png",
     "type": "default"
   },
@@ -112,7 +112,7 @@
     "address": "0xf1d0ad0c4a612ecf4931b673245f1fc2935bccdc",
     "name": "wanZCN",
     "symbol": "wanZCN",
-    "decimals": 10,
+    "decimal": 10,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanZCN.png",
     "type": "default"
   },
@@ -121,7 +121,7 @@
     "address": "0xde1a20792553b84ddb254ca78fa7c5996ad5fbe2",
     "name": "wanVIBE",
     "symbol": "wanVIBE",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanVIBE.png",
     "type": "default"
   },
@@ -130,7 +130,7 @@
     "address": "0xa31b67a8cba75ea6ced8340d8bc0431ab052a4fa",
     "name": "wanMKR",
     "symbol": "wanMKR",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanMKR.png",
     "type": "default"
   },
@@ -139,7 +139,7 @@
     "address": "0xf665e0e3e75d16466345e1129530ec28839efaea",
     "name": "wanXRP",
     "symbol": "wanXRP",
-    "decimals": 6,
+    "decimal": 6,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanXRP.png",
     "type": "default"
   },
@@ -148,7 +148,7 @@
     "address": "0x6e11655d6ab3781c6613db8cb1bc3dee9a7e111f",
     "name": "ZOO",
     "symbol": "ZOO",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/ZOO.png",
     "type": "default"
   },
@@ -157,7 +157,7 @@
     "address": "0x8f587d955f3cf200290426f91a7c3687787ed703",
     "name": "wanOCEAN",
     "symbol": "wanOCEAN",
-    "decimals": 18,
+    "decimal": 18,
     "logoURI": "https://token-icons.vercel.app/icon/wanswap/wanOCEAN.png",
     "type": "default"
   }
