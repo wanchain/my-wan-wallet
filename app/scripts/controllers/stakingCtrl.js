@@ -5,138 +5,87 @@ var stakingCtrl = function ($scope, $sce, walletService, $rootScope) {
         name: '',
         logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=',
     }
-    ajaxReq.http.get('https://mywanwallet.com/validators.json').then(function (data) {
-        data = data['data']
-        $scope.validatorstaticconfig = []
-        if (ajaxReq.chainId === 6) {
-            $scope.validatorstaticconfig = data['pluto']
-        }
-        if (ajaxReq.chainId === 3) {
-            $scope.validatorstaticconfig = data['testnet']
-        }
-        if (ajaxReq.chainId === 1) {
-            $scope.validatorstaticconfig = data['mainnet']
-        }
-        var sortByProperty = function (objArray, prop, direction) {
-            const clone = objArray.slice(0)
-            const direct = arguments.length > 2 ? arguments[2] : 1
-            const propPath = (prop.constructor === Array) ? prop : prop.split('.')
-            clone.sort(function (a, b) {
-                for (var p in propPath) {
-                    if (a[propPath[p]] && b[propPath[p]]) {
-                        a = a[propPath[p]]
-                        b = b[propPath[p]]
-                    }
+    var sortByProperty = function (objArray, prop, direction) {
+      const clone = objArray.slice(0)
+      const direct = arguments.length > 2 ? arguments[2] : 1
+      const propPath = (prop.constructor === Array) ? prop : prop.split('.')
+      clone.sort(function (a, b) {
+          for (var p in propPath) {
+              if (a[propPath[p]] && b[propPath[p]]) {
+                  a = a[propPath[p]]
+                  b = b[propPath[p]]
+              }
+          }
+          return ((a < b) ? -1 * direct : ((a > b) ? 1 * direct : 0))
+      })
+      return clone
+  }
+
+    ajaxReq.getCurrentBlock(function (data) {
+        $scope.currentBlockNumber = data.data
+        ajaxReq.getValidators(parseInt($scope.currentBlockNumber), function (data) {
+          // Fill the validator list with the validators from the pos_stakeinfo call
+          ajaxReq.validatorList = data.data
+          $scope.chainlayerid = 0
+          var a = 0
+          var b = 0
+          $scope.addressDrtv.readOnly = true
+
+          // Now add fields to show remaining capacity and total capacity
+          var i = 0
+          for (b in ajaxReq.validatorList) {
+              ajaxReq.validatorList[b].selfstake = parseInt(ajaxReq.validatorList[b].amount) / 1000000000000000000
+              ajaxReq.validatorList[b].totalstake = parseInt(ajaxReq.validatorList[b].amount) / 1000000000000000000
+
+              for (i = 0; i < ajaxReq.validatorList[b].partners.length; i++) {
+                  ajaxReq.validatorList[b].totalstake += parseInt(ajaxReq.validatorList[b].partners[i].amount) / 1000000000000000000
+                  ajaxReq.validatorList[b].selfstake += parseInt(ajaxReq.validatorList[b].partners[i].amount) / 1000000000000000000
+              }
+
+              for (i = 0; i < ajaxReq.validatorList[b].clients.length; i++) {
+                  ajaxReq.validatorList[b].totalstake += parseInt(ajaxReq.validatorList[b].clients[i].amount) / 1000000000000000000
+              }
+
+              ajaxReq.validatorList[b].selfstake = Math.floor(ajaxReq.validatorList[b].selfstake)
+              ajaxReq.validatorList[b].totalstake = Math.floor(ajaxReq.validatorList[b].totalstake)
+              ajaxReq.validatorList[b].capacity = Math.floor(ajaxReq.validatorList[b].selfstake * 11)
+              ajaxReq.validatorList[b].leftovercapacity = Math.floor(ajaxReq.validatorList[b].capacity - ajaxReq.validatorList[b].totalstake)
+              ajaxReq.validatorList[b].feestring = (ajaxReq.validatorList[b].feeRate / 100) + '%'
+          }
+
+          // Now change the list in the right order (total stake descending)
+          var newValidatorList = sortByProperty(ajaxReq.validatorList, 'totalstake', -1)
+          ajaxReq.validatorList = newValidatorList
+
+          // Now change the list in the right order (chainlayer on top, first named then unnamed validators)
+          newValidatorList = []
+
+          // Other validators with a name
+          for (a in ajaxReq.validatorList) {
+              if (ajaxReq.validatorList[a].name) {
+                ajaxReq.validatorList[a].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[a].address)
+                // Only add if Fee < 10000
+                if (ajaxReq.validatorList[a].feeRate < 10000) {
+                    newValidatorList.push(ajaxReq.validatorList[a])
                 }
-                return ((a < b) ? -1 * direct : ((a > b) ? 1 * direct : 0))
-            })
-            return clone
-        }
+              }
+          }
 
-        ajaxReq.getCurrentBlock(function (data) {
-            $scope.currentBlockNumber = data.data
-            ajaxReq.getValidators(parseInt($scope.currentBlockNumber), function (data) {
-                // Fill the validator list with the validators from the pos_stakeinfo call
-                ajaxReq.validatorList = data.data
-                $scope.chainlayerid = 0
-                var a = 0
-                var b = 0
-                $scope.addressDrtv.readOnly = true
-
-                // Merge the manual info into the list
-                for (a in $scope.validatorstaticconfig) {
-                    for (b in ajaxReq.validatorList) {
-                        if ($scope.validatorstaticconfig[a].address.toLowerCase() === ajaxReq.validatorList[b].address.toLowerCase()) {
-                            ajaxReq.validatorList[b].name = $scope.validatorstaticconfig[a].name
-                            ajaxReq.validatorList[b].logo = $scope.validatorstaticconfig[a].logo
-                            ajaxReq.validatorList[b].custom = $scope.validatorstaticconfig[a]
-                        }
-                        if (ajaxReq.validatorList[b].name === 'ChainLayer') {
-                            // Do the checksum here because we'll skip ChainLayer later :)
-                            ajaxReq.validatorList[b].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[b].address)
-                            $scope.chainlayerid = b
-                        }
-                    }
-                }
-
-                // Now add fields to show remaining capacity and total capacity
-                var i = 0
-                for (b in ajaxReq.validatorList) {
-                    ajaxReq.validatorList[b].selfstake = parseInt(ajaxReq.validatorList[b].amount) / 1000000000000000000
-                    ajaxReq.validatorList[b].totalstake = parseInt(ajaxReq.validatorList[b].amount) / 1000000000000000000
-
-                    for (i = 0; i < ajaxReq.validatorList[b].partners.length; i++) {
-                        ajaxReq.validatorList[b].totalstake += parseInt(ajaxReq.validatorList[b].partners[i].amount) / 1000000000000000000
-                        ajaxReq.validatorList[b].selfstake += parseInt(ajaxReq.validatorList[b].partners[i].amount) / 1000000000000000000
-                    }
-
-                    for (i = 0; i < ajaxReq.validatorList[b].clients.length; i++) {
-                        ajaxReq.validatorList[b].totalstake += parseInt(ajaxReq.validatorList[b].clients[i].amount) / 1000000000000000000
-                    }
-
-                    ajaxReq.validatorList[b].selfstake = Math.floor(ajaxReq.validatorList[b].selfstake)
-                    ajaxReq.validatorList[b].totalstake = Math.floor(ajaxReq.validatorList[b].totalstake)
-                    ajaxReq.validatorList[b].capacity = Math.floor(ajaxReq.validatorList[b].selfstake * 11)
-                    ajaxReq.validatorList[b].leftovercapacity = Math.floor(ajaxReq.validatorList[b].capacity - ajaxReq.validatorList[b].totalstake)
-                    ajaxReq.validatorList[b].feestring = (ajaxReq.validatorList[b].feeRate / 100) + '%'
-                }
-
-                // If no response from pos_stakeinfo the list is empty so we'll just add ChainLayer
-                if (ajaxReq.validatorList.length === 0) {
-                    ajaxReq.validatorList = $scope.validatorstaticconfig
-                    $scope.selectExistingValidator(0)
-                    $scope.chainlayerid = 0
-                } else {
-                    // Select ChainLayer
-                    // $scope.selectExistingValidator($scope.chainlayerid)
-                }
-
-                // Now change the list in the right order (total stake descending)
-                var newValidatorList = sortByProperty(ajaxReq.validatorList, 'totalstake', -1)
-                ajaxReq.validatorList = newValidatorList
-
-                // Now change the list in the right order (chainlayer on top, first named then unnamed validators)
-                newValidatorList = []
-                // ChainLayer
-                for (a in ajaxReq.validatorList) {
-                    if (ajaxReq.validatorList[a].name) {
-                        if (ajaxReq.validatorList[a].name === 'ChainLayer') {
-                            ajaxReq.validatorList[a].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[a].address)
-                            newValidatorList.push(ajaxReq.validatorList[a])
-                        }
-                    }
-                }
-
-                // Other validators with a name
-                for (a in ajaxReq.validatorList) {
-                    if (ajaxReq.validatorList[a].name) {
-                        if (ajaxReq.validatorList[a].name !== 'ChainLayer') {
-                            // Make address checksum
-                            ajaxReq.validatorList[a].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[a].address)
-                            // Only add if Fee < 10000
-                            if (ajaxReq.validatorList[a].feeRate < 10000) {
-                                newValidatorList.push(ajaxReq.validatorList[a])
-                            }
-                        }
-                    }
-                }
-
-                // Validators without a name
-                for (a in ajaxReq.validatorList) {
-                    if (!ajaxReq.validatorList[a].name) {
-                        // Make address checksum
-                        ajaxReq.validatorList[a].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[a].address)
-                        // Make name same as address
-                        ajaxReq.validatorList[a].name = ajaxReq.validatorList[a].address
-                        // Only add if Fee < 10000
-                        if (ajaxReq.validatorList[a].feeRate < 10000) {
-                            newValidatorList.push(ajaxReq.validatorList[a])
-                        }
-                    }
-                }
-                ajaxReq.validatorList = newValidatorList
-                $scope.selectExistingValidator(0)
-            })
+          // Validators without a name
+          for (a in ajaxReq.validatorList) {
+              if (!ajaxReq.validatorList[a].name) {
+                  // Make address checksum
+                  ajaxReq.validatorList[a].address = ethUtil.toChecksumAddress(ajaxReq.validatorList[a].address)
+                  // Make name same as address
+                  ajaxReq.validatorList[a].name = ajaxReq.validatorList[a].address
+                  // Only add if Fee < 10000
+                  if (ajaxReq.validatorList[a].feeRate < 10000) {
+                      newValidatorList.push(ajaxReq.validatorList[a])
+                  }
+              }
+          }
+          ajaxReq.validatorList = newValidatorList
+          $scope.selectExistingValidator(0)
         })
     })
 
