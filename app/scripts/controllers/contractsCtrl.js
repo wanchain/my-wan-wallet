@@ -77,8 +77,12 @@ var contractsCtrl = function ($scope, $sce, walletService) {
     })
     $scope.selectExistingAbi = function (index) {
         $scope.selectedAbi = ajaxReq.abiList[index]
-        $scope.contract.address = $scope.selectedAbi.address
-        $scope.addressDrtv.ensAddressField = $scope.selectedAbi.address
+        if ($scope.contract.address && $scope.Validator.isValidAddress($scope.contract.address) && ['WRC20 ABI', 'WRC721 ABI'].includes($scope.selectedAbi.name)) {
+          $scope.contract.abi = ajaxReq.abiList[index].abi
+        } else {
+          $scope.contract.address = $scope.selectedAbi.address
+          $scope.addressDrtv.ensAddressField = $scope.selectedAbi.address
+        }
         $scope.contract.name = $scope.selectedAbi.name
         $scope.addressDrtv.showDerivedAddress = false
         $scope.dropdownExistingContracts = false
