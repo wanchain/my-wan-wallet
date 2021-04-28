@@ -54,7 +54,7 @@
 
   <!--wallet decrypt-->
   <article class="form-group"
-           ng-show="(!wd && visibility=='deployView') || (!wd && visibility=='interactView' && contract.selectedFunc && !contract.functions[contract.selectedFunc.index].constant)">
+           ng-show="(!wd && visibility=='deployView') || (!wd && visibility=='interactView' && contract.selectedFunc && !(contract.functions[contract.selectedFunc.index].constant || contract.functions[contract.selectedFunc.index].stateMutability === 'view'))">
       @@if (site === 'cx' )  {  <cx-wallet-decrypt-drtv></cx-wallet-decrypt-drtv>   }
       @@if (site === 'mew' ) {  <wallet-decrypt-drtv></wallet-decrypt-drtv>         }
   </article>
@@ -63,13 +63,13 @@
 
     <button class="btn btn-primary btn-block"
             ng-click="readFromContract()"
-            ng-show="contract.functions[contract.selectedFunc.index].constant && showRead">
+            ng-show="(contract.functions[contract.selectedFunc.index].constant||contract.functions[contract.selectedFunc.index].stateMutability === 'view') && showRead">
       <span translate="CONTRACT_Read"> READ </span>
     </button>
 
     <button class="btn btn-primary btn-block"
             ng-click="generateContractTx()"
-            ng-show="!contract.functions[contract.selectedFunc.index].constant">
+            ng-show="!(contract.functions[contract.selectedFunc.index].constant || contract.functions[contract.selectedFunc.index].stateMutability === 'view')">
       <span translate="CONTRACT_Write"> WRITE </span>
     </button>
 

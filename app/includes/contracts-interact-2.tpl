@@ -188,7 +188,7 @@
 
 
   <!-- Output -->
-  <span class="form-group output" ng-show="contract.functions[contract.selectedFunc.index].constant">
+  <span class="form-group output" ng-show="contract.functions[contract.selectedFunc.index].constant || contract.functions[contract.selectedFunc.index].stateMutability === 'view'">
     <div ng-repeat="output in contract.functions[contract.selectedFunc.index].outputs track by $index" class="form-group">
       <div ng-switch on="output.type">
 
