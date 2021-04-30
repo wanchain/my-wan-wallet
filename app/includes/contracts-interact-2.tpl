@@ -238,6 +238,20 @@
           <span ng-show="output.value==false" class="output-boolean-false"> <img src="images/icon-x.svg" width="22px" height="22px" />  FALSE </span>
         </p>
 
+        <!-- Tuple -->
+        <p class="item write-boolean" ng-switch-when="tuple">
+          <label>
+            &#8627; {{output.name}}
+            <small> {{output.type}} </small>
+          </label>
+          <div ng-repeat="(key, value) in output.value" ng-switch-when="tuple">
+            <label>
+              <small> {{key}} </small>
+            </label>
+            <input class="form-control" type="text" ng-model="value" readonly/>
+          </div>
+        </p>
+
         <!--  -->
         <p class="item" ng-switch-default>
           <label>

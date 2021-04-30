@@ -1,4 +1,7 @@
 'use strict'
+const Web3 = require('web3_1.2')
+const web3 = new Web3()
+
 var contractsCtrl = function ($scope, $sce, walletService) {
     $scope.ajaxReq = ajaxReq
     walletService.wallet = null
@@ -186,14 +189,32 @@ var contractsCtrl = function ($scope, $sce, walletService) {
     $scope.readFromContract = function () {
         ajaxReq.getEthCall({ to: $scope.contract.address, data: $scope.getTxData() }, function (data) {
             if (!data.error) {
+                var decoded
                 var curFunc = $scope.contract.functions[$scope.contract.selectedFunc.index]
                 var outTypes = curFunc.outputs.map(function (i) {
                     return i.type
                 })
-                var decoded = ethUtil.solidityCoder.decodeParams(outTypes, data.data.replace('0x', ''))
-                for (var i in decoded) {
-                    if (decoded[i] instanceof BigNumber) curFunc.outputs[i].value = decoded[i].toFixed(0)
-                    else curFunc.outputs[i].value = decoded[i]
+                if (outTypes.length === 1 && outTypes[0] === 'tuple') {
+                  const val = {}
+                  const params = curFunc.outputs.map(i => {
+                    i.components.forEach(v => {
+                      val[v.name] = v.type
+                    })
+                    return {
+                      [i.name]: val,
+                    }
+                  })
+                  decoded = web3.eth.abi.decodeParameters(params, data.data.replace('0x', ''))[0]
+                  curFunc.outputs[0].value = {}
+                  Object.keys(val).forEach(j => {
+                    curFunc.outputs[0].value[j] = decoded[j]
+                  })
+                } else {
+                  decoded = ethUtil.solidityCoder.decodeParams(outTypes, data.data.replace('0x', ''))
+                  for (var i in decoded) {
+                      if (decoded[i] instanceof BigNumber) curFunc.outputs[i].value = decoded[i].toFixed(0)
+                      else curFunc.outputs[i].value = decoded[i]
+                  }
                 }
             } else throw data.msg
 
