@@ -117,6 +117,7 @@
     "javascript-precommit": "0.0.8",
     "raven-js": "^3.27.0",
     "run-sequence": "^1.2.2",
-    "web3": "^0.20.2"
+    "web3": "^0.20.2",
+    "web3_1.2": "npm:web3@1.2.9"
   }
 }
