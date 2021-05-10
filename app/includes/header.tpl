@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="mewApp">
 <head>
-<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-123889185-3"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QDBD0ZMH4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-123889185-3');
-</script-->
+  gtag('config', 'G-4QDBD0ZMH4');
+</script>
 
-<script>
+<!-- <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -18,7 +19,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-123889185-3', 'auto');
 // ga('send', 'pageview');
-</script>
+</script> -->
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
