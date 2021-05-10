@@ -66,9 +66,9 @@ var contractsCtrl = function ($scope, $sce, walletService) {
         }
     }, true)
     $scope.$watch('contract.address', function (newValue, oldValue) {
-        if (['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name) || $scope.Validator.isValidAddress($scope.contract.address)) {
+        if (['WRC20 ABI', 'WRC721 ABI', 'MappingTokenV2 ABI'].includes($scope.contract.name) || $scope.Validator.isValidAddress($scope.contract.address)) {
             for (var i in ajaxReq.abiList) {
-                if (!$scope.contract.address && ['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name)) {
+                if (!$scope.contract.address && ['WRC20 ABI', 'WRC721 ABI', 'MappingTokenV2 ABI'].includes($scope.contract.name)) {
                   break
                 }
                 if (ajaxReq.abiList[i].name === $scope.contract.name || ajaxReq.abiList[i].address.toLowerCase() === $scope.contract.address.toLowerCase()) {
@@ -80,7 +80,7 @@ var contractsCtrl = function ($scope, $sce, walletService) {
     })
     $scope.selectExistingAbi = function (index) {
         $scope.selectedAbi = ajaxReq.abiList[index]
-        if ($scope.contract.address && $scope.Validator.isValidAddress($scope.contract.address) && ['WRC20 ABI', 'WRC721 ABI'].includes($scope.selectedAbi.name)) {
+        if ($scope.contract.address && $scope.Validator.isValidAddress($scope.contract.address) && ['WRC20 ABI', 'WRC721 ABI', 'MappingTokenV2 ABI'].includes($scope.selectedAbi.name)) {
           $scope.contract.abi = ajaxReq.abiList[index].abi
         } else {
           $scope.contract.address = $scope.selectedAbi.address
@@ -222,7 +222,7 @@ var contractsCtrl = function ($scope, $sce, walletService) {
     }
     $scope.initContract = function () {
         try {
-            if (!['WRC20 ABI', 'WRC721 ABI'].includes($scope.contract.name) && !$scope.Validator.isValidAddress($scope.contract.address)) throw globalFuncs.errorMsgs[5]
+            if (!['WRC20 ABI', 'WRC721 ABI', 'MappingTokenV2 ABI'].includes($scope.contract.name) && !$scope.Validator.isValidAddress($scope.contract.address)) throw globalFuncs.errorMsgs[5]
             else if (!$scope.Validator.isJSON($scope.contract.abi)) throw globalFuncs.errorMsgs[26]
             $scope.contract.functions = []
             var tAbi = JSON.parse($scope.contract.abi)
